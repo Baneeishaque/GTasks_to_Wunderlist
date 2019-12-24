@@ -29,11 +29,6 @@ class AndroidWunderlistResetTestCase(unittest.TestCase):
 
         submit = self.driver.find_element_by_id('com.wunderkinder.wunderlistandroid:id/login_button')
         submit.click()
-        time.sleep(60)
-
-        # quick_add_fab = self.driver.find_element_by_xpath(
-        #     "//android.widget.ImageButton[@resource-id='com.wunderkinder.wunderlistandroid:id/fab_quick_add']")
-        # quick_add_fab.click()
 
         # From list of options available click on Rankings by finding element using uiautomator
         # rankings = self.driver.find_element_by_android_uiautomator('new UiSelector().text("Rankings")')

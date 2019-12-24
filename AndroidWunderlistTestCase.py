@@ -6,21 +6,22 @@ from AppiumTestUtils import AppiumTestUtils
 
 
 class AndroidWunderlistTestCase(unittest.TestCase):
+    desired_caps = AndroidWunderlistTestBase().desired_caps
     driver = None
 
     def setUp(self):
-        # base = AndroidWunderlistTestBase()
-        # print(base.desired_caps)
+        self.prepare_desired_caps()
+        global driver
+        driver = AppiumTestUtils.get_driver(desired_caps)
+        # print(driver)
 
-        desired_caps = AndroidWunderlistTestBase().desired_caps
+    @staticmethod
+    def prepare_desired_caps():
+        global desired_caps
         desired_caps['noReset'] = 'true'
         desired_caps['fullReset'] = 'false'
         desired_caps['appActivity'] = '.activity.WLMainFragmentActivity'
         # print(desired_caps)
-
-        global driver
-        driver = AppiumTestUtils.get_driver(desired_caps)
-        print(driver)
 
     @staticmethod
     def test_wunderlist():
@@ -30,11 +31,11 @@ class AndroidWunderlistTestCase(unittest.TestCase):
 
         quick_add_fab = driver.find_element_by_id('com.wunderkinder.wunderlistandroid:id/fab_quick_add')
         quick_add_fab.click()
-        pass
 
     def tearDown(self):
+        """Tear down the test"""
         # print(driver)
-        AppiumTestUtils.tear_down(driver)
+        driver.quit()
 
 
 if __name__ == '__main__':
